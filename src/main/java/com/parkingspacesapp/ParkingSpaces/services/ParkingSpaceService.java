@@ -29,10 +29,9 @@ public class ParkingSpaceService {
     }
 
     public Set<ParkingSpaceDto> findAvailableParkingSpacesByGivenDateTimes(LocalDateTime from, LocalDateTime to) {
-        List<ParkingSpaceEntity> parkingSpaces = StreamSupport
+        return StreamSupport
                 .stream(parkingSpaceRepository.findAvailableParkingSpacesByGivenDateTimes(from, to).spliterator(), false)
-                .collect(Collectors.toList());
-        return parkingSpaces.stream().map(this::convertToDto)
+                .map(this::convertToDto)
                 .collect(Collectors.toSet());
     }
 

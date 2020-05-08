@@ -28,14 +28,10 @@ public class UserService {
     }
 
     public Set<UserDto> findAllUsers() {
-        Iterable<UserEntity> usersInDbIterable = userRepository.findAll();
-        List<UserEntity> usersInDb = StreamSupport
-                .stream(usersInDbIterable.spliterator(), false)
-                .collect(Collectors.toList());
-        List<UserDto> usersDto = usersInDb.stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
-        return new HashSet<>(usersDto);
+            return StreamSupport
+                    .stream(userRepository.findAll().spliterator(), false)
+                    .map(this::convertToDto)
+                    .collect(Collectors.toSet());
     }
 
     public UserDto addUser(UserDto userDto) {

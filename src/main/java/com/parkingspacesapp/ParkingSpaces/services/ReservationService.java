@@ -31,10 +31,8 @@ public class ReservationService {
     }
 
     public Set<ReservationDto> findAllReservations() {
-        List<ReservationEntity> reservations = StreamSupport
+        return StreamSupport
                 .stream(reservationRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-        return reservations.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toSet());
     }
